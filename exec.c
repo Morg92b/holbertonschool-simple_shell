@@ -17,16 +17,25 @@ int execute_command(char **args)
 {
 	pid_t pid;
 	int status;
+	char *command_path;
 
 	if (strcmp(args[0], "exit") == 0)
 	{
 		return (dash_exit());
 	}
+	command_path = find_executable_path(args[0]);
+
+	if (command_path == NULL)
+	{
+		fprintf(stderr, "%s: command not found\n", args[0]);
+		return (1);
+	}
+
 	pid = fork();
 
 	if (pid == 0)
 	{
-		if (execvp(args[0], args) < 0)
+		if (execvp(command_path, args) < 0)
 		{
 			perror("Execution Error");
 			exit(EXIT_FAILURE);
@@ -40,10 +49,6 @@ int execute_command(char **args)
 	{
 		waitpid(pid, &status, WUNTRACED);
 	}
-	if (args[0] == NULL)
-	{
-		return (1);
-	}
-
+	free(command_path);
 	return (1);
 }
