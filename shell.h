@@ -7,6 +7,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <limits.h>
 /*--------------Prototypes------------------*/
 
 void prompt_and_read_input(char **input_line);
@@ -15,6 +16,7 @@ void prompt_and_read_input(char **input_line);
 
 char *read_user_input(void);
 char **parse_command(char *input_line);
+char *find_executable_path(char *command);
 
 /*------------------------------------------*/
 
