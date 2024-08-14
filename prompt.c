@@ -6,7 +6,7 @@
  */
 void prompt_and_read_input(char **input_line)
 {
-	char *prompt = "(:D)";
+	char *prompt = "(:D) ";
 
 	if (isatty(STDIN_FILENO))
 	{
