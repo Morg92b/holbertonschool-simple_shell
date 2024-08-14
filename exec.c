@@ -27,7 +27,7 @@ int execute_command(char **args)
 
 	if (command_path == NULL)
 	{
-		fprintf(stderr, "%s: command not found\n", args[0]);
+		fprintf(stderr, "%s: not found\n", args[0]);
 		return (1);
 	}
 
