@@ -31,7 +31,7 @@ char **parse_command(char *input_line)
 			{
 				free(tokens);
 				perror("realloc");
-				exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
 			}
 			tokens = token_temp;
 		}

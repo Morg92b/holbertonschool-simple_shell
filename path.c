@@ -16,7 +16,6 @@ char *find_executable_path(char *command)
 		free(path_copy);
 		return (NULL);
 	}
-
 	if (strchr(command, '/'))
 	{
 		if (access(command, X_OK) == 0)
@@ -28,7 +27,6 @@ char *find_executable_path(char *command)
 		free(full_path);
 		return (NULL);
 	}
-
 	while (dir)
 	{
 		strcpy(full_path, dir);
