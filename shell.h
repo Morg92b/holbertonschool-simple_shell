@@ -22,5 +22,10 @@ char *find_executable_path(char *command);
 
 int execute_command(char **args);
 int dash_exit(void);
+int env_environ(void);
+
+/*-----------------------------------------*/
+
+extern char	**environ;
 
 #endif /*SHELL_H*/

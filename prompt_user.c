@@ -23,7 +23,7 @@ char *read_user_input(void)
 		}
 		else
 		{
-			perror("read_user_input");
+			perror("getline");
 			exit(EXIT_FAILURE);
 		}
 	}

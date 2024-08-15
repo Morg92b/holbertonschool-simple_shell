@@ -20,35 +20,29 @@ int execute_command(char **args)
 	char *command_path;
 
 	if (strcmp(args[0], "exit") == 0)
-	{
 		return (dash_exit());
-	}
+	if (strcmp(args[0], "env") == 0)
+		return (env_environ());
 	command_path = find_executable_path(args[0]);
-
 	if (command_path == NULL)
 	{
 		fprintf(stderr, "%s: not found\n", args[0]);
 		return (1);
 	}
-
 	pid = fork();
-
 	if (pid == 0)
 	{
-		if (execvp(command_path, args) < 0)
+		if (execve(command_path, args, environ) < 0)
 		{
-			perror("Execution Error");
+			perror("execve");
 			exit(EXIT_FAILURE);
 		}
 	}
 	else if (pid < 0)
-	{
-		perror("Fork Error");
-	}
+		perror("fork");
 	else
-	{
-		waitpid(pid, &status, WUNTRACED);
-	}
+		if (waitpid(pid, &status, WUNTRACED) == -1)
+			perror("waitpid");
 	free(command_path);
 	return (1);
 }
