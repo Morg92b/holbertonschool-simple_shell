@@ -7,10 +7,8 @@
  */
 char *find_executable_path(char *command)
 {
-	char *path = getenv("PATH");
-	char *path_copy = strdup(path);
-	char *dir = strtok(path_copy, ":");
-	char *full_path = malloc(PATH_MAX);
+	char *path = getenv("PATH"), *path_copy = strdup(path);
+	char *dir = strtok(path_copy, ":"), *full_path = malloc(PATH_MAX);
 
 	if (!full_path)
 	{
@@ -19,7 +17,19 @@ char *find_executable_path(char *command)
 		return (NULL);
 	}
 
-	while (dir != NULL)
+	if (strchr(command, '/'))
+	{
+		if (access(command, X_OK) == 0)
+		{
+			free(path_copy);
+			return (strdup(command));
+		}
+		free(path_copy);
+		free(full_path);
+		return (NULL);
+	}
+
+	while (dir)
 	{
 		strcpy(full_path, dir);
 		strcat(full_path, "/");

@@ -35,7 +35,7 @@ int execute_command(char **args)
 
 	if (pid == 0)
 	{
-		if (execvp(command_path, args) < 0)
+		if (execve(command_path, args, environ) < 0)
 		{
 			perror("Execution Error");
 			exit(EXIT_FAILURE);
