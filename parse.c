@@ -14,7 +14,7 @@ char **parse_command(char *input_line)
 
 	if (!tokens)
 	{
-		fprintf(stderr, "Allocation error\n");
+		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
 	token = strtok(input_line, " \t\r\n\a");
@@ -30,7 +30,7 @@ char **parse_command(char *input_line)
 			if (!token_temp)
 			{
 				free(tokens);
-				fprintf(stderr, "Allocation error\n");
+				perror("realloc");
 				exit(EXIT_FAILURE);
 			}
 			tokens = token_temp;

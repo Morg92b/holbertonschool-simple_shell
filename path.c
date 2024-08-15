@@ -12,7 +12,7 @@ char *find_executable_path(char *command)
 
 	if (!full_path)
 	{
-		perror("Alllocation error");
+		perror("malloc");
 		free(path_copy);
 		return (NULL);
 	}

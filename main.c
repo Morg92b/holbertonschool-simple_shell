@@ -12,14 +12,7 @@ int main(void)
 
 	while (status)
 	{
-		if (isatty(STDIN_FILENO))
-			prompt_and_read_input(&input_line);
-		else
-		{
-			input_line = read_user_input();
-			if (input_line == NULL)
-				break;
-		}
+		prompt_and_read_input(&input_line);
 
 		args = parse_command(input_line);
 

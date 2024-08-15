@@ -11,7 +11,11 @@ int env_environ(void)
 
 	while (*env)
 	{
-		printf("%s\n", *env);
+		if (printf("%s\n", *env) < 0)
+		{
+			perror("printf");
+			return (1);
+		}
 		env++;
 	}
 	return (1);

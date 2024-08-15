@@ -34,14 +34,15 @@ int execute_command(char **args)
 	{
 		if (execve(command_path, args, environ) < 0)
 		{
-			perror("Execution Error");
+			perror("execve");
 			exit(EXIT_FAILURE);
 		}
 	}
 	else if (pid < 0)
-		perror("Fork Error");
+		perror("fork");
 	else
-		waitpid(pid, &status, WUNTRACED);
+		if (waitpid(pid, &status, WUNTRACED) == -1)
+			perror("waitpid");
 	free(command_path);
 	return (1);
 }
