@@ -8,6 +8,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <limits.h>
+#include <stddef.h>
+
 /*--------------Prototypes------------------*/
 
 void prompt_and_read_input(char **input_line);
@@ -17,12 +19,21 @@ void prompt_and_read_input(char **input_line);
 char *read_user_input(void);
 char **parse_command(char *input_line);
 char *find_executable_path(char *command);
+char *_getenv(const char *name);
+char *_strdup(const char *str);
+char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
+char *_strchr(char *s, char c);
+
 
 /*------------------------------------------*/
 
 int execute_command(char **args);
 int dash_exit(void);
 int env_environ(void);
+int _strcmp(char *s1, char *s2);
+int _strncmp(const char *str1, const char str2, size_t n);
+int _strlen(char *s);
 
 /*-----------------------------------------*/
 
