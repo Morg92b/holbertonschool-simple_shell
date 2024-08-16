@@ -19,9 +19,9 @@ int execute_command(char **args)
 	int status;
 	char *command_path;
 
-	if (strcmp(args[0], "exit") == 0)
+	if (_strcmp(args[0], "exit") == 0)
 		return (dash_exit());
-	if (strcmp(args[0], "env") == 0)
+	if (_strcmp(args[0], "env") == 0)
 		return (env_environ());
 	command_path = find_executable_path(args[0]);
 	if (command_path == NULL)

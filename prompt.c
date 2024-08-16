@@ -10,7 +10,7 @@ void prompt_and_read_input(char **input_line)
 
 	if (isatty(STDIN_FILENO))
 	{
-		if (write(STDOUT_FILENO, prompt, strlen(prompt)) == -1)
+		if (write(STDOUT_FILENO, prompt, _strlen(prompt)) == -1)
 		{
 			perror("write");
 			exit(EXIT_FAILURE);
