@@ -17,15 +17,15 @@ char *read_user_input(void)
 	{
 		free(input);
 
-		if (feof(stdin))
-		{
-			exit(EXIT_SUCCESS);
-		}
-		else
+		if (errno == EINTR)
+			return (NULL);
+		else if (errno == EINVAL || errno == ENOMEM)
 		{
 			perror("getline");
 			exit(EXIT_FAILURE);
 		}
+		else
+			exit(EXIT_SUCCESS);
 	}
 	return (input);
 }
