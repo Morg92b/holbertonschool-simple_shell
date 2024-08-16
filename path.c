@@ -22,6 +22,7 @@ char *find_executable_path(char *command)
 		if (access(command, X_OK) == 0)
 		{
 			free(path_copy);
+			free(full_path);
 			return (_strdup(command));
 		}
 		free(path_copy);
