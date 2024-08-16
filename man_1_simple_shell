@@ -1,0 +1,138 @@
+.TH shell 1						16/08/2024
+
+
+.SH NAME
+sh — shell, the standard command language interpreter.
+
+
+.SH SYNOPSIS
+sh [-abCefhimnuvx] [-o option]...
+	[command_file [argument...]]
+
+sh -c [-abCefhimnuvx] [-o option]...
+	command_string [command_name [argument...]]
+
+sh -s [-abCefhimnuvx] [-o option]...
+	[argument...]
+
+
+.SH DESCRIPTION
+The sh utility is a command language interpreter that shall execute commands read from a command line string, the standard input, or a specified file.
+
+Pathname expansion shall not fail due to the size of a file.
+
+Shell input and output redirections have an implementation- defined offset maximum that is established in the open file description.
+
+
+.SH OPTIONS
+The sh utility shall conform to the Base Definitions volume of POSIX.1‐2017, Section 12.2, Utility Syntax Guidelines, with an extension for support of a leading <plus-sign> ('+') as noted below.
+
+The -a, -b, -C, -e, -f, -m, -n, -o option, -u, -v, and -x options are described as part of the set utility in Section 2.14, Special Built-In Utilities.  The option letters derived from the set special built-in shall also be accepted with a leading <plus-sign> ('+') instead of a leading <hyphen-minus> (meaning the reverse case of the option as described in this volume of POSIX.1‐2017).
+
+The following additional options shall be supported:
+
+-c	Read commands from the command_string operand. Set the value of special parameter 0 (see Special Parameters) from the value of the command_name operand and the positional parameters ($1, $2, and so on) in sequence from the remaining argument operands. No commands shall be read from the standard input.
+
+-i	Specify that the shell is interactive; see below. An implementation may treat specifying the -i option as an error if the real user ID of the calling process does not equal the effective user ID or if the real group ID does not equal the effective group ID.
+
+-s	Read commands from the standard input.
+
+If there are no operands and the -c option is not specified, the -s option shall be assumed.
+
+If the -i option is present, or if there are no operands and the shell's standard input and standard error are attached to a terminal, the shell is considered to be interactive.
+
+
+.SH OPERANDS
+The following operands shall be supported:
+
+-	A single <hyphen-minus> shall be treated as the first operand and then ignored. If both '-' and "--" are given as arguments, or if other operands precede the single <hyphen-minus>, the results are undefined.
+
+argument	The positional parameters ($1, $2, and so on) shall be set to arguments, if any.
+
+command_file
+	The pathname of a file containing commands. If the pathname contains one or more <slash> characters, the implementation attempts to read that file; the file need not be executable. If the pathname does not contain a <slash> character:
+
+	*  The implementation shall attempt to read that file from the current working directory; the file need not be executable.
+
+	*  If the file is not in the current working directory, the implementation may perform a search for an executable file using the value of PATH, as described in Command Search and Execution.
+
+	Special parameter 0 (see Special Parameters) shall be set to the value of command_file. If sh is called using a synopsis form that omits command_file, special parameter 0 shall be set to the value of the first argument passed to sh from its parent (for example, argv[0] for a C program), which is normally a pathname used to execute the sh utility.
+
+	command_name
+		A string assigned to special parameter 0 when executing the commands in command_string.  If command_name is not specified, special parameter 0 shall be set to the value of the first argument passed to sh from its parent (for example, argv[0] for a C program), which is normally a pathname used to execute the sh utility.
+
+		command_string
+			A string that shall be interpreted by the shell as one or more commands, as if the string were the argument to the system() function defined in the System Interfaces volume of POSIX.1‐2017. If the command_string operand is an empty string, sh shall exit with a zero exit status.
+
+
+.SH STDIN
+The standard input shall be used only if one of the following is true:
+
+	*  The -s option is specified.
+
+	*  The -c option is not specified and no operands are specified.
+
+	*  The script executes one or more commands that require input
+           from standard input (such as a read command that does not
+           redirect its input).
+
+	See the INPUT FILES section.
+
+When the shell is using standard input and it invokes a command that also uses standard input, the shell shall ensure that the standard input file pointer points directly after the command it has read when the command begins execution. It shall not read ahead in such a manner that any characters intended to be read by the invoked command are consumed by the shell (whether interpreted by the shell or not) or that characters that are not read by the invoked command are not seen by the shell. When the command expecting to read standard input is started asynchronously by an interactive shell, it is unspecified whether characters are read by the command or interpreted by the shell.
+
+If the standard input to sh is a FIFO or terminal device and is set to non-blocking reads, then sh shall enable blocking reads on standard input. This shall remain in effect when the command completes.
+
+
+.SH INPUT FILES
+The input file shall be a text file, except that line lengths shall be unlimited. If the input file consists solely of zero or more blank lines and comments, sh shall exit with a zero exit status.
+
+
+.SH ENVIRONMENT VARIABLES
+The following environment variables shall affect the execution of sh:
+
+	ENV	This variable, when and only when an interactive shell is invoked, shall be subjected to parameter expansion (see Parameter Expansion) by the shell, and the resulting value shall be used as a pathname of a file containing shell commands to execute in the current environment.  The file need not be executable. If the expanded value of ENV is not an absolute pathname, the results are unspecified.  ENV shall be ignored if the real and effective user IDs or real and effective group IDs of the process are different.
+
+	PATH	Establish a string formatted as described in the Base Definitions volume of POSIX.1‐2017, Chapter 8, Environment Variables, used to effect command interpretation; see Section 2.9.1.1, Command Search and Execution.
+
+	PWD	This variable shall represent an absolute pathname of the current working directory. Assignments to this variable may be ignored.
+
+
+.SH STDOUT
+See the STDERR section.
+
+
+.SH STDERR
+Except as otherwise stated (by the descriptions of any invoked utilities or in interactive mode), standard error shall be used only for diagnostic messages.
+
+
+.SH EXIT STATUS
+The following exit values shall be returned:
+
+	0	The script to be executed consisted solely of zero or more blank lines or comments, or both.
+
+	1‐125	A non-interactive shell detected an error other than command_file not found or executable, including but not limited to syntax, redirection, or variable assignment errors.
+
+	126	A specified command_file could not be executed due to an [ENOEXEC] error (see Command Search and Execution).
+
+	127	A specified command_file could not be found by a non-interactive shell.
+
+	Otherwise, the shell shall return the exit status of the last command it invoked or attempted to invoke (see also the exit utility in Special Built-In Utilities).
+
+
+.SH EXAMPLES
+1. Execute a shell command from a string:
+
+	sh -c "cat myfile"
+
+2. Execute a shell script from a file in the current directory:
+
+	sh my_shell_cmds
+
+
+.SH AUTHORS
+
+BOUAZIZ Morgan, FORGET guillaume, CISSE ahmed
+
+
+.SH SEE ALSO
+Real sh man page.
