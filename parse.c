@@ -26,7 +26,7 @@ char **parse_command(char *input_line)
 		if (position >= buffsize)
 		{
 			buffsize *= 4;
-			token_temp = realloc(tokens, buffsize * sizeof(char *));
+			token_temp = _realloc(tokens, buffsize * sizeof(char *));
 			if (!token_temp)
 			{
 				free(tokens);
