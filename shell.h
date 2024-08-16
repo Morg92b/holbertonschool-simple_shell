@@ -8,24 +8,16 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <limits.h>
+
+#define BUFFER_SIZE 1024
 /*--------------Prototypes------------------*/
 
-void prompt_and_read_input(char **input_line);
-
-/*------------------------------------------*/
-
-char *read_user_input(void);
-char **parse_command(char *input_line);
-char *find_executable_path(char *command);
-
-/*------------------------------------------*/
-
-int execute_command(char **args);
-int dash_exit(void);
-int env_environ(void);
-
-/*-----------------------------------------*/
-
 extern char	**environ;
+
+int	main(void);
+
+void	prompt(void);
+void	execute_command(char *buffer);
+void	remove_newline(char *buffer);
 
 #endif /*SHELL_H*/
