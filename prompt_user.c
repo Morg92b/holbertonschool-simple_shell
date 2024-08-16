@@ -17,7 +17,7 @@ char *read_user_input(void)
 	{
 		free(input);
 
-		if (feof(stdin))
+		if (isatty(STDIN_FILENO))
 		{
 			exit(EXIT_SUCCESS);
 		}
