@@ -1,33 +1,26 @@
 #include "shell.h"
 
 /**
- * main - test my shell
+ * main - Entry of our Shell
  * Return: 0
  */
-int main(void)
+
+int	main(void)
 {
-	char *input_line;
-	char **args;
-	int status = 1;
+	char	*buffer = NULL;
+	size_t	buffer_size = 0;
 
-	while (status)
+	while (1)
 	{
-		prompt_and_read_input(&input_line);
-
-		args = parse_command(input_line);
-
-		if (args[0] == NULL)
+		prompt();
+		if (getline(&buffer, &buffer_size, stdin) == -1)
 		{
-			free(input_line);
-			free(args);
-			continue;
+			printf("\n");
+			break;
 		}
-
-		status = execute_command(args);
-
-		free(input_line);
-		free(args);
+		remove_newline(buffer);
+		execute_command(buffer);
 	}
-
+	free(buffer);
 	return (0);
 }
