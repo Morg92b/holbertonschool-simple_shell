@@ -1,3 +1,4 @@
+![images (1)](https://github.com/Morg92b/holbertonschool-simple_shell/blob/morgan/shell%20project%20.jpg)
 
 # Simple Shell
 
