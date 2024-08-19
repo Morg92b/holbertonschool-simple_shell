@@ -140,7 +140,9 @@ CTRL+D
 | [parse.c](https://github.com/Morg92b/holbertonschool-simple_shell/blob/main/parse.c) | The function splits a command line into tokens |
 | [prompt.c](https://github.com/Morg92b/holbertonschool-simple_shell/blob/main/prompt.c) | The function displays a prompt and reads the user's input |
 | [prompt_user.c](https://github.com/Morg92b/holbertonschool-simple_shell/blob/main/prompt_user.c) | The function reads input from stdin and returns it |
+## Man page
 
+You can check the [Man page](https://github.com/Morg92b/holbertonschool-simple_shell/blob/morgan/man_1_simple_shell) of the function here.
 ## Authors
 
 - [Morgan Bouaziz](https://github.com/Morg92b)
