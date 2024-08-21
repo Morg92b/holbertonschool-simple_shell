@@ -73,7 +73,7 @@ As part of our studies at Holberton School, my partner and I embarked on an exci
 * Implement the env built-in, that prints the current environment
 
 ## Flowchart
-A faire !!!!!!!!!!
+![images (2)](https://github.com/Morg92b/holbertonschool-simple_shell/blob/morgan/flowchart_simple_shell.png)
 ## Usage
 #### To use this program,
 
