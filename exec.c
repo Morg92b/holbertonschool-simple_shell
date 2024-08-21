@@ -26,7 +26,7 @@ int execute_command(char **args)
 	command_path = find_executable_path(args[0]);
 	if (command_path == NULL)
 	{
-		fprintf(stderr, "1: %s: not found\n", args[0]);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
 		exit(127);
 		return (1);
 	}
