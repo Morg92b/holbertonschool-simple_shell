@@ -26,14 +26,13 @@ char *_strdup(char *str)
 }
 
 /**
- * _strncmp - Compare les premiers n caractères de deux chaînes
- * @str1: La première chaîne à comparer
- * @str2: La deuxième chaîne à comparer
- * @n: Le nombre de caractères à comparer
+ * _strncmp - Compare the firsts n characters of 2 strings.
+ * @str1: First string.
+ * @str2: Second string.
+ * @n: number of character to compare.
  *
- * Return: Un entier inférieur, égal ou
- * supérieur à zéro si str1 est respectivement
- *         inférieur, égal ou supérieur à str2.
+ * Return: An integer smaller, equal or superior to 0 if,
+ * str1 is respectively inferior, equal or superior to str2.
  */
 
 int _strncmp(char *str1, char *str2, size_t n)
@@ -51,11 +50,11 @@ int _strncmp(char *str1, char *str2, size_t n)
 }
 
 /**
- * *_getenv - Récupère la valeur d'une variable d'environnement
- * @name: Le nom de la variable d'environnement
+ * *_getenv - Get the value of an environment variable.
+ * @name: Name of the environment variable.
  *
- * Return: Un pointeur vers la valeur de la variable d'environnement,
- *         ou NULL si la variable n'existe pas.
+ * Return: Pointer to the value of an environment variable,
+ * or NULL if the variable doesn't exist.
  */
 
 char *_getenv(char *name)
