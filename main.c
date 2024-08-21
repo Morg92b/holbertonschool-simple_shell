@@ -6,8 +6,8 @@
  */
 int main(void)
 {
-	char *input_line;
-	char **args;
+	char *input_line = NULL;
+	char **args = NULL;
 	int status = 1;
 
 	while (status)
@@ -28,6 +28,5 @@ int main(void)
 		free(input_line);
 		free(args);
 	}
-
 	return (0);
 }

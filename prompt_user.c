@@ -16,16 +16,7 @@ char *read_user_input(void)
 	if (characters == -1)
 	{
 		free(input);
-
-		if (isatty(STDIN_FILENO))
-		{
-			exit(EXIT_SUCCESS);
-		}
-		else
-		{
-			perror("getline");
-			exit(EXIT_FAILURE);
-		}
+		exit(0);
 	}
 	return (input);
 }
